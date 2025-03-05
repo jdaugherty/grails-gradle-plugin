@@ -22,7 +22,7 @@ version "${projectVersion}"
 group "org.grails.example"
 
 dependencies {
-    implementation "org.apache.groovy:groovy-all:$groovyVersion"
+    implementation "org.apache.groovy:groovy:$groovyVersion"
 }
 
 grailsPublish {

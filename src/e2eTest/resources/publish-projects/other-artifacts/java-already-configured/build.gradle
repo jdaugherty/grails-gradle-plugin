@@ -21,7 +21,7 @@ apply plugin: 'java-library'
 apply plugin: 'groovy'
 
 dependencies {
-    implementation "org.apache.groovy:groovy-all:$groovyVersion"
+    implementation "org.apache.groovy:groovy:$groovyVersion"
 }
 
 java {

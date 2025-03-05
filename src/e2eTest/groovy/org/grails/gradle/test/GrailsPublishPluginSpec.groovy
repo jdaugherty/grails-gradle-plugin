@@ -483,8 +483,7 @@ class GrailsPublishPluginSpec extends GradleSpecification {
             }
 
             dependencies {
-                implementation platform("org.grails:grails-bom:\$grailsVersion")
-                implementation "org.apache.groovy:groovy"
+                implementation "org.apache.groovy:groovy-all:\$groovyVersion"
             }
         
             apply plugin: 'org.grails.grails-publish'

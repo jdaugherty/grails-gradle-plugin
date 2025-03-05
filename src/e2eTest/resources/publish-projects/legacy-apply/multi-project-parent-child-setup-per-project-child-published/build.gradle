@@ -21,8 +21,7 @@ apply plugin: 'java-library'
 apply plugin: 'groovy'
 
 dependencies {
-    implementation platform("org.grails:grails-bom:$grailsVersion")
-    implementation "org.apache.groovy:groovy"
+    implementation "org.apache.groovy:groovy-all:$groovyVersion"
 }
 
 subprojects { project ->

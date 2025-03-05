@@ -21,7 +21,6 @@ version "${projectVersion}"
 group "org.grails.example"
 
 dependencies {
-    implementation platform("org.grails:grails-bom:$grailsVersion")
-    implementation "org.apache.groovy:groovy"
+    implementation "org.apache.groovy:groovy-all:$groovyVersion"
     implementation 'org.grails.example:subproject1'
 }

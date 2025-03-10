@@ -311,10 +311,10 @@ class GrailsGradlePlugin extends GroovyPlugin {
             GrailsExtension grailsExt = project.extensions.getByType(GrailsExtension)
             if (grailsExt.importJavaTime) {
                 outputs.files.singleFile << '''
-                configuration.with {
+                withConfig(configuration) { 
                     def importCustomizer = new org.codehaus.groovy.control.customizers.ImportCustomizer()
                     importCustomizer.addStarImports('java.time')
-                    addCompilationCustomizers(importCustomizer)
+                    configuration.addCompilationCustomizers(importCustomizer)
                 }
                 '''.stripIndent(16)
             }

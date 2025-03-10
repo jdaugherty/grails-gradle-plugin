@@ -39,8 +39,6 @@ import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import org.grails.gradle.plugin.util.SourceSets
 
-import static com.bmuschko.gradle.nexus.NexusPlugin.*
-
 /**
  * A plugin to ease publishing Grails related artifacts - including source, groovydoc (as javadoc jars), and plugins
  *
@@ -119,9 +117,9 @@ Note: if project properties are used, the properties must be defined prior to ap
 
         final ExtraPropertiesExtension extraPropertiesExtension = extensionContainer.findByType(ExtraPropertiesExtension)
 
-        extraPropertiesExtension.setProperty(SIGNING_KEY_ID, project.findProperty(SIGNING_KEY_ID) ?: System.getenv('SIGNING_KEY'))
-        extraPropertiesExtension.setProperty(SIGNING_PASSWORD, project.findProperty(SIGNING_PASSWORD) ?: System.getenv('SIGNING_PASSPHRASE'))
-        extraPropertiesExtension.setProperty(SIGNING_KEYRING, project.findProperty(SIGNING_KEYRING) ?: System.getenv('SIGNING_KEYRING'))
+        extraPropertiesExtension.setProperty('signing.keyId', project.findProperty('signing.keyId') ?: System.getenv('SIGNING_KEY'))
+        extraPropertiesExtension.setProperty('signing.password', project.findProperty('signing.password') ?: System.getenv('SIGNING_PASSPHRASE'))
+        extraPropertiesExtension.setProperty('signing.secretKeyRingFile', project.findProperty('signing.secretKeyRingFile') ?: System.getenv('SIGNING_KEYRING'))
 
         PublishType snapshotPublishType = gpe.snapshotPublishType
         PublishType releasePublishType = gpe.releasePublishType

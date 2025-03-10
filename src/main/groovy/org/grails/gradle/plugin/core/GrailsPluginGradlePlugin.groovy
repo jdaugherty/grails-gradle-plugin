@@ -64,9 +64,7 @@ class GrailsPluginGradlePlugin extends GrailsGradlePlugin {
 
         configureAstSources(project)
 
-        project.gradle.projectsEvaluated {
-            configureProjectNameAndVersionASTMetadata(project)
-        }
+        configureProjectNameAndVersionASTMetadata(project)
 
         configureAssembleTask(project)
 
@@ -276,17 +274,19 @@ class GrailsPluginGradlePlugin extends GrailsGradlePlugin {
     }
 
     protected void configureProjectNameAndVersionASTMetadata(Project project) {
-        def projectName = project.name
-        def projectVersion = project.version
+        def projectNameProvider = project.provider { project.name }
+        def projectVersionProvider = project.provider { project.version }
         def configScriptTask = project.tasks.named('configScript').get()
-        configScriptTask.inputs.property('name', projectName)
-        configScriptTask.inputs.property('version', projectVersion)
+        configScriptTask.inputs.property('name', projectNameProvider)
+        configScriptTask.inputs.property('version', projectVersionProvider)
         configScriptTask.doLast {
+            def resolvedProjectName = projectNameProvider.get()
+            def resolvedProjectVersion = projectVersionProvider.get()
             outputs.files.singleFile << """
             withConfig(configuration) {
                 inline(phase: 'CONVERSION') { source, context, classNode ->
-                    classNode.putNodeMetaData('projectVersion', '$projectVersion')
-                    classNode.putNodeMetaData('projectName', '$projectName')
+                    classNode.putNodeMetaData('projectVersion', '$resolvedProjectVersion')
+                    classNode.putNodeMetaData('projectName', '$resolvedProjectName')
                     classNode.putNodeMetaData('isPlugin', 'true')
                 }
             }
